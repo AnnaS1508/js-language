@@ -1,24 +1,29 @@
-function code (num,codingString){
-let res = "";
-if(Duplicate(codingString) == true){
-    console.log('ERROR: duplicate symbols');
-}
-else {
-    do{
-        const digit=Math.trunc(num % (codingString.lenght-1));
-        const symb =getSymbol(digit,codingString);
-        res=symb+res;
-        num=Math.trunc(num/(codingString.lenght-1));
-    }while(num >= 1);
-    return res;
-}
-function getSymbol(digit, codingString) {
-   
-    return codingString[digit];
-}}
+function encode (num, codingString) {
+    //codingString - any string with no repeated symbols
+    // you should validate codingString doesn't contain repeated symbols
+    //base = length of codingString
+    // algorithm the same as specified above
+    // getSymbol(digit, codingString) using operator []
+    let flRepeated = false;
+    for (let i = 0; i < codingString.length; i++) {
+            if(codingString.lastIndexOf(codingString[i]) != i) {
+                    console.log(`coding string has repeated symbol ${codingString[i]}`)
+                    flRepeated = true;
+            }
+    }
+    if (!flRepeated) {
+        let res = "" ;
+        const base = codingString.length;
+        do {
+                const digit = Math.trunc(num % base);
+                const digitSymb = codingString[digit];
+                res = digitSymb + res;
+                num = Math.trunc(num / base);
 
-function Duplicate(codingString){
-    return new set (codingString).size != codingString.lenght;
+        } while(num != 0); 
+        return res;  
+    }
 }
-
-console.log(code(3,'dog'))
+console.log(`encode(5, '.-') = ${encode(5, '.-')}`);
+console.log(`encode(5, '..-') = ${encode(5, '..-')}`);
+console.log(`encode(555, '&*()%$#@!+') = ${encode(555, '&*()%$#@!+')}`);
