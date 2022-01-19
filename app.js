@@ -1,50 +1,14 @@
-console.log("Hello World");
-/*for(var i=0;i<3;i++)
-setTimeout(function(){
-    console.log(i);
-})*/
-
-/*for(let i=0;i<3;i++){
-    setTimeout(function(){
-        console.log(i);
-    })
-}*/
-
-const fun = function(a, b){
-    return a + b;
-}
-let a=5;
-//console.log(a**2);
-//console.log(fun(10,20));
-//console.log(a(10,20));error
-//console.log(fun**2);NaN
-//console.log("12"+12);
-//console.log("12"-12);
-//console.log("ab"-12);
-//console.log(`+"12"+12 = $ {+"12"+12}`)
-
-//HOMEWORK:
-console.log(("a" + + "a" +'a'+'s').toLowerCase());
+ var a = [13,28,4,15,25,-10,40,17,27];
+ let odd = a.filter(x =>x%2).sort((a,b) =>b-a);
+ let even = a.filter(x =>!(x%2)).sort((a,b) =>a-b);
+ let res = [...even,...odd]
+ console.log(res);
 
 
 
-function calc(num1,num2,num3) {
-
-    if(num2 =="+"){
-        return num1 + num3;}
-else if (num2 =="-"){
-    return num1 - num3;} 
-else if (num2 == "*"){
-    return num1 * num3;}
-else if(num2 =="/"){
-    return num1/num3;}
-
-}
-console.log(calc(10,'+',5));
-
-
-
-function sum(a){
-    return (b) => a + b
-}
-console.log(sum(10,3))
+ function transposeArray(array, arrayLength){ 
+     var newArray = []; for(var i = 0; i < array.length; i++){
+          newArray.push([]); }; for(var i = 0; i < array.length; i++){ 
+              for(var j = 0; j < arrayLength; j++){ newArray[j].push(array[i][j]); 
+            }; }; 
+ return newArray};
