@@ -1,95 +1,37 @@
-function mapper (n, i, a) {
-  return `<li>${i + 1} of ${a.length} - ${n}</li>`    
-}
-function mapper2(n) {
-   return n + 10;
-}
-function someFunction() {
-   const ar = [-10, 50, -12, 80, 90];
-   const ar3 = myMap(mapper);
-//console.log(ar3);
+                            //#1//
+ const arrayString =["bc", "lmn", "d", "lmn", "a", "lmn", "a"] ;
+ function displayOccurences(array){
+     const res= createObj(array);
+     Object.entries(res).sort((e1,e2) =>{
+         const res = e2[1] - e1[1];
+         return res === 0 ? e1[0].localeCompare(e2[0]) : res;
+
+     }).forEach(e => console.log( `${e[0]}->${e[1]}`));
+}    
+
+function createObj (array){
+    return array.reduce ((result, element) => { result[element] = result[element] === undefined ? 1 : result[element]+1;return result}, {});
 
 }
-const ar = [-10, 50, -12, 80, 40];
-ar.push(70);
-// str - "-10#50#-12#80#40#70"
-/*********solution based on substring */
-// let str = '';
-// ar.forEach(function(n) {
-//         str += n + '#';
-// })
-// str = str.substring(0, str.length - 1);
-/*************************solution based on forEach form second number */
-// const ar1 = ar.slice(1);
-// let str =  '' + ar[0];
-// ar1.forEach(n => str += '#' + n);
-// console.log(str);
-/*****************************printing out sequense number of element, element, length of arry */
-// 1 of 5 - -10;    ....
-//ar.forEach((n, i, a) => console.log(`${i + 1} of ${a.length} - ${n}`));
+displayOccurences(arrayString);
 
-// method "map"
-//use case of applying method map : you want to create new array with elements that are received as result of some conversion
-//example you want to get new array with elements that are muliplication on 2 of each source element
-// const ar2 = ar.map(n => n * 2);
-// console.log(ar2);
-// someFunction();
-/*****************HW 13 task1 definition */
-// write function myForEach(array, callback-function);
-//array  - being iterated array
-//callback-function - function that will be called for each element of array
-//callback-function should take three arguments: current elemnt, current index, being iterated array
-//example of standard forEach : array.forEach(n => str += '#' + n);
-//example of myForEach : myForEach(array, n => str += '#' + n);
 
-/********************************************************************* */
-/**********************************************HW 13 definition task2 */
-//write method myMap  for the same functionality as standard method map
-//function myMap(array, callback-function)
-//myMap will apply your method myForEach
-//array  - being iterated array
-//callback-function - function that will be called for each element of array
-//callback-function should take three arguments: current elemnt, current index, being iterated array
-//example of standard map : map(n => n * 2);
-//example of myMap : myMap(array, n => n * 2);
 
-/******************************Solution HW 13*/
-function myForEach(array, callback) {
-   for (let i = 0; i < array.length; i++) {
-           callback(array[i], i, array);
-   }
+                    //#2//
+function countBy (array,callbackFunc){
+
+    const res = array.reduce((result,element) => {result[callbackFunc(element)] = result[callbackFunc(element)] ===undefined ? 1 : result[callbackFunc(element)] +1;return res}{});
+    return res;
 }
-function myMap(array, callback) {
-   const res = [];
-   function forEachCall(n, i, a) {
-           res.push(callback(n, i, a));
-   }
-   myForEach(array, forEachCall);
-   return res;
-}
-// const ar10 = [-10, 50, -12, 80, 40];
-// myForEach(ar10, n => console.log(n));
-// const ar4 = myMap(ar, mapper2)
-// console.log(ar4);
-/***********************************************************cw 14 */
-const ar20 = [13, 17, 20, 23, 2, 40];
-// const arEvenOdd = ar20.filter((n, _i, a) => a.length % 2 == 0 ?
-//  n % 2 == 0 : n % 2 == 1);
-// console.log(arEvenOdd);
-/******************************************HW 14 definition task1 */
-//TODO write myFilter(array, callback) based on myForEach
-//callback - function with three possible parameters: current element, current index, reference to array
-/********************************************************************* */
-let res = ar20.reduce((res, cur) => res + cur, 0);
-console.log(res)
-const max = ar20.reduce((max, cur)=>cur > max ? cur : max, ar20[0]);
-console.log(max);
-console.log(res);
-// reduce with no second argument
-res = ar20.reduce((res, cur) => res + cur);
-/******************************************HW 14 definition task1 */
-//TODO write myReduce(array, callback, initialResult) based on myForEach
-//callback - function with three possible parameters: current element, current index, reference to array
-// if the user call doesn't contain a seond argument, then the first elemnt of the array will be
-//considered as initial result (in this case iterating begins from the second element of the array)
-/********************************************************************* */
+
+const arr1 =[6.4,7.3,6.5,6.9];
+let statistics = countBy(arr1, element =>Math.floor(element));
+console.log(statistics);
+
+const arr2 =['abcd', 'lmnr', 'ab', 'ddddd'];
+statistics =countBy(arr2, element =>element.lenght);
+console.log(statistics);
+
+const arr3= [{age : 25, id : 123, name : "Vasya"}, {age : 50, id : 123, name : "Petya"}, {age : 50, id : 123, name : "Petya"}, {age : 70, id : 123, name : "Olya"}];
+statistics =countBy(arr3, element => element.name);
+console.log( statistics);
