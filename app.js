@@ -1,95 +1,61 @@
-function mapper (n, i, a) {
-  return `<li>${i + 1} of ${a.length} - ${n}</li>`    
-}
-function mapper2(n) {
-   return n + 10;
-}
-function someFunction() {
-   const ar = [-10, 50, -12, 80, 90];
-   const ar3 = myMap(mapper);
-//console.log(ar3);
+const circle = {radius: 20, square: function(){
+    return 3.14* (this.radius**2)
+}, perimeter :() => 2*3.14 *this.radius,
+toString:function(){
+    return `radius of this circle is ${this.radius}`
+}};
+console.log(`square=${circle.square()}, perimetr=${circle.perimeter()}`);
 
-}
-const ar = [-10, 50, -12, 80, 40];
-ar.push(70);
-// str - "-10#50#-12#80#40#70"
-/*********solution based on substring */
-// let str = '';
-// ar.forEach(function(n) {
-//         str += n + '#';
-// })
-// str = str.substring(0, str.length - 1);
-/*************************solution based on forEach form second number */
-// const ar1 = ar.slice(1);
-// let str =  '' + ar[0];
-// ar1.forEach(n => str += '#' + n);
-// console.log(str);
-/*****************************printing out sequense number of element, element, length of arry */
-// 1 of 5 - -10;    ....
-//ar.forEach((n, i, a) => console.log(`${i + 1} of ${a.length} - ${n}`));
+//circle.square will be converted to square(circle) where circle as argument value
+//this is the hidden parametr in the function 
+//in any arrow function there ic no "this"
 
-// method "map"
-//use case of applying method map : you want to create new array with elements that are received as result of some conversion
-//example you want to get new array with elements that are muliplication on 2 of each source element
-// const ar2 = ar.map(n => n * 2);
-// console.log(ar2);
-// someFunction();
-/*****************HW 13 task1 definition */
-// write function myForEach(array, callback-function);
-//array  - being iterated array
-//callback-function - function that will be called for each element of array
-//callback-function should take three arguments: current elemnt, current index, being iterated array
-//example of standard forEach : array.forEach(n => str += '#' + n);
-//example of myForEach : myForEach(array, n => str += '#' + n);
-
-/********************************************************************* */
-/**********************************************HW 13 definition task2 */
-//write method myMap  for the same functionality as standard method map
-//function myMap(array, callback-function)
-//myMap will apply your method myForEach
-//array  - being iterated array
-//callback-function - function that will be called for each element of array
-//callback-function should take three arguments: current elemnt, current index, being iterated array
-//example of standard map : map(n => n * 2);
-//example of myMap : myMap(array, n => n * 2);
-
-/******************************Solution HW 13*/
-function myForEach(array, callback) {
-   for (let i = 0; i < array.length; i++) {
-           callback(array[i], i, array);
-   }
+function square (circle){
+    return 3.14* (circle.radius**2);
 }
-function myMap(array, callback) {
-   const res = [];
-   function forEachCall(n, i, a) {
-           res.push(callback(n, i, a));
-   }
-   myForEach(array, forEachCall);
-   return res;
+
+console.log(`circle: ${circle}`)
+
+const circle1={radius: 20,  perimeter function (){
+    return  3.14* this.radius**2
+},
+    toString:function(){
+        return `radius of this circle is ${this.radius}`
+    }};
+    //circle1.square(); ERROR
+    function Circle(radius){
+        this.radius =radius;
+    }
+
+    Circle.prototype.square =function(){
+        return 3.14 *(this.radius**2);
+    }
+
+    Circle.prototype.square =function(){
+        return 2*3.14 *this.radius
+    }
+
+    Circle.prototype.toString = function(){
+        return `radius of this circle is $(this.radius)`
+    }
+    const circle10 =new Circle(10);
+
+//EXAMPLE
+  /*const myArray = new MyArray(10);
+console.log(myArray.get(100))// displayed out  10
+myArray.set(100,500) // set 500 ay=t index 100
+console.log(myArray.get(200)) // displayed out  10
+console.log(myArray.get(100)) // displayed out  500
+myArray.setValue(300);
+console.log(myArray.get(100)) // displayed out 300
+console.log(myArray(200)) // displayed out 300*/
+
+
+Array.prototype.filter =function(callbackPredicate){
+    console.log(`Tel-ran copyright`)
+    const res =[]
+    this.forEach((n,i,a) => callbackPredicate(n,i,a) && `res.push(n)`);
+return res;
 }
-// const ar10 = [-10, 50, -12, 80, 40];
-// myForEach(ar10, n => console.log(n));
-// const ar4 = myMap(ar, mapper2)
-// console.log(ar4);
-/***********************************************************cw 14 */
-const ar20 = [13, 17, 20, 23, 2, 40];
-// const arEvenOdd = ar20.filter((n, _i, a) => a.length % 2 == 0 ?
-//  n % 2 == 0 : n % 2 == 1);
-// console.log(arEvenOdd);
-/******************************************HW 14 definition task1 */
-//TODO write myFilter(array, callback) based on myForEach
-//callback - function with three possible parameters: current element, current index, reference to array
-/********************************************************************* */
-let res = ar20.reduce((res, cur) => res + cur, 0);
-console.log(res)
-const max = ar20.reduce((max, cur)=>cur > max ? cur : max, ar20[0]);
-console.log(max);
-console.log(res);
-// reduce with no second argument
-res = ar20.reduce((res, cur) => res + cur);
-/******************************************HW 14 definition task1 */
-//TODO write myReduce(array, callback, initialResult) based on myForEach
-//callback - function with three possible parameters: current element, current index, reference to array
-// if the user call doesn't contain a seond argument, then the first elemnt of the array will be
-//considered as initial result (in this case iterating begins from the second element of the array)
-/********************************************************************* */
+const ar = [1,2,4,5,100];
+ar.filter(n => n%2 !==0).forEach(n => console.log(n));
