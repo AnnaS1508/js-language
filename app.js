@@ -1,95 +1,100 @@
-function mapper (n, i, a) {
-  return `<li>${i + 1} of ${a.length} - ${n}</li>`    
+class Person {
+    #id;
+    #name;
+    constructor(id, name){
+        this.#id=id;
+        this.#name=name;
+    }
+    getId(){
+        return this.#id;
+    }
+    getName(){
+        return this.#name
+    }
+    toString(){
+        return `id: ${this.#id}; name:${this.#name}`
+    }
 }
-function mapper2(n) {
-   return n + 10;
+const person =new Person(123, 'Moshe');
+console.log(`person is ${person}`)
+
+class Employee extends Person{
+    #salary;
+    constructor(id,name,salary){
+super(id,name); 
+this.#salary = salary;
+    }
+    computeSalary(){
+        return this.#salary
+    }
+  toString(){
+      return super.toString() + ` salary: ${this.#salary} `
+  }         
 }
-function someFunction() {
-   const ar = [-10, 50, -12, 80, 90];
-   const ar3 = myMap(mapper);
-//console.log(ar3);
+const person2 = new Employee(124,"Sara", 5000);
+console.log (`person2 is ${person2}`)
+console.log(typeof(person2)) //just object
+console.log (person2.constructor.name)
+class Child extends Person{
+    #kindergarden
+    constructor(id,name, kindergarden){
+        super(id,name)
+        this.kindergarden= kindergarden
+    }
+    getkindergarden(){
+        return this.kindergarden;
+    }
+    toString(){
+        return super.toString() + ` kinderGarten name is ${this.#kinderGarten}`
+    }
+}
+const person3 = new Child(125,'Yakob','Shalom');
+console.log(`person3 is ${person3}`)
+
+class WageEmployee extends Employee{
+    #hours
+    #wage
+    constructor(id,name,salary,hours,wage){
+        super(id,name,salary)
+        this.#hours =hours;
+        this.#wage=wage;
+    }
+    computeSalary(){
+        return super.computeSalary() + this.#hours *this.#wage
+    }
+}
+
+const person4 =new WageEmployee(126,'Asaf',1000,10,100);
+console.log('person4 is ${person4}')
+
+//HW17//
+
+const person = [
+    new Child(100,'Olya','Shalom'),
+    new Child(101,'Serega','Boker'),
+    new Child(102,'kolya','Shalom'),
+    new Employee(103,'Vasya',1000),
+    new WageEmployee(104,'Tolya',1000,10,100)
+]
+
+function countOfPersonType (person,type){
+return resarray=persons.filter(el=> el.constructor.name ===type).length
+}
+
+const cOPT=countOfPersonType(persons,'Child');
+console.log(cOPT)
+
+function computeSalaryBudget(persons){
+    return persons.reduce((res,cur) => res+=cur.computeSalary ? cur.computeSalary(): 0,0);
 
 }
-const ar = [-10, 50, -12, 80, 40];
-ar.push(70);
-// str - "-10#50#-12#80#40#70"
-/*********solution based on substring */
-// let str = '';
-// ar.forEach(function(n) {
-//         str += n + '#';
-// })
-// str = str.substring(0, str.length - 1);
-/*************************solution based on forEach form second number */
-// const ar1 = ar.slice(1);
-// let str =  '' + ar[0];
-// ar1.forEach(n => str += '#' + n);
-// console.log(str);
-/*****************************printing out sequense number of element, element, length of arry */
-// 1 of 5 - -10;    ....
-//ar.forEach((n, i, a) => console.log(`${i + 1} of ${a.length} - ${n}`));
+const cSB=computeSalaryBudget(persons);
+console.log(cSB);
 
-// method "map"
-//use case of applying method map : you want to create new array with elements that are received as result of some conversion
-//example you want to get new array with elements that are muliplication on 2 of each source element
-// const ar2 = ar.map(n => n * 2);
-// console.log(ar2);
-// someFunction();
-/*****************HW 13 task1 definition */
-// write function myForEach(array, callback-function);
-//array  - being iterated array
-//callback-function - function that will be called for each element of array
-//callback-function should take three arguments: current elemnt, current index, being iterated array
-//example of standard forEach : array.forEach(n => str += '#' + n);
-//example of myForEach : myForEach(array, n => str += '#' + n);
+function countChildrenGarden(persons,kindergarden){
+    return persons.filter(el=> el.getkindergarden && el.getkindergarden()===kindergarden).length
 
-/********************************************************************* */
-/**********************************************HW 13 definition task2 */
-//write method myMap  for the same functionality as standard method map
-//function myMap(array, callback-function)
-//myMap will apply your method myForEach
-//array  - being iterated array
-//callback-function - function that will be called for each element of array
-//callback-function should take three arguments: current elemnt, current index, being iterated array
-//example of standard map : map(n => n * 2);
-//example of myMap : myMap(array, n => n * 2);
-
-/******************************Solution HW 13*/
-function myForEach(array, callback) {
-   for (let i = 0; i < array.length; i++) {
-           callback(array[i], i, array);
-   }
 }
-function myMap(array, callback) {
-   const res = [];
-   function forEachCall(n, i, a) {
-           res.push(callback(n, i, a));
-   }
-   myForEach(array, forEachCall);
-   return res;
-}
-// const ar10 = [-10, 50, -12, 80, 40];
-// myForEach(ar10, n => console.log(n));
-// const ar4 = myMap(ar, mapper2)
-// console.log(ar4);
-/***********************************************************cw 14 */
-const ar20 = [13, 17, 20, 23, 2, 40];
-// const arEvenOdd = ar20.filter((n, _i, a) => a.length % 2 == 0 ?
-//  n % 2 == 0 : n % 2 == 1);
-// console.log(arEvenOdd);
-/******************************************HW 14 definition task1 */
-//TODO write myFilter(array, callback) based on myForEach
-//callback - function with three possible parameters: current element, current index, reference to array
-/********************************************************************* */
-let res = ar20.reduce((res, cur) => res + cur, 0);
-console.log(res)
-const max = ar20.reduce((max, cur)=>cur > max ? cur : max, ar20[0]);
-console.log(max);
-console.log(res);
-// reduce with no second argument
-res = ar20.reduce((res, cur) => res + cur);
-/******************************************HW 14 definition task1 */
-//TODO write myReduce(array, callback, initialResult) based on myForEach
-//callback - function with three possible parameters: current element, current index, reference to array
-// if the user call doesn't contain a seond argument, then the first elemnt of the array will be
-//considered as initial result (in this case iterating begins from the second element of the array)
-/********************************************************************* */
+
+const cCG=countChildrenGarden(persons,'Shalom');
+console.log(cCG);
