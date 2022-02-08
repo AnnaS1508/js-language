@@ -85,14 +85,11 @@ const cOPT=countOfPersonType(persons,'Child');
 console.log(cOPT)
 
 function computeSalaryBudget(persons){
-    //return persons.reduce((res,cur) => res+=cur.computeSalary ? cur.computeSalary(): 0,0);
-const allchildren=person.filter(p=> !! p.computeSalary);
-const salaryValues =allEmloyee.map( p=>p.computeSalary());
-return salaryValues.reduce ((res,cur)=>res+cur)
+    return persons.reduce((res,cur) => res+=cur.computeSalary ? cur.computeSalary(): 0,0);
 
 }
-//const cSB=computeSalaryBudget(persons);
-//console.log(cSB);
+const cSB=computeSalaryBudget(persons);
+console.log(cSB);
 
 function countChildrenGarden(persons,kindergarden){
     return persons.filter(el=> el.getkindergarden && el.getkindergarden()===kindergarden).length
@@ -102,11 +99,4 @@ function countChildrenGarden(persons,kindergarden){
 const cCG=countChildrenGarden(persons,'Shalom');
 console.log(cCG);
 
-function testOutput(fun,expected){
-    console.log(`function $(fun.name} ; expected result: ${expected} ;actual result: ${fun()}`)
-}
 
-//testOutput(WageEmployee. prototype. computeSalary.bind(person4),2000)
-
-//testOutput(computeSalaryBudget.bind(undefined,persons),3000)
-testOutput(ccounOfPersonType.bind(undefined,persons,`Child`),3)
